@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Segmentation</title>
+  <link rel="stylesheet" href="{%static 'css/index.css'%}">
+</head>
+<body  >
+  <h2 style="border: ridge; margin-left:200px; margin-right: 200px; padding:0px 0px 0px 0px; background-color: wheat ; text-align: center;color:black; ">Mall Customer Segmentation</h2>
+
+
+  <div style="margin-left:200px; padding-left: 100px; margin-right: 200px ; padding-bottom: 10px;  border: ridge; background: bisque;">
+    
+    <h3>upload the file to be clustered:</h3>
+    <h3>choosen file: {{selected}}</h3>
+    
+    
+    
+  
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input  type="file" name="myfile">
+      <button  type="submit">Upload</button>
+    </form>
+    
+    <br>
+    <input style="background-color:cyan; border-radius: 10%; border: ridge; " type='button' value='generate plots' onclick='runScript()'>
+    <input style="background-color:cyan; border-radius: 10%; border: ridge; " type='button' value='cluster info' onclick='runInfo()'>
+    <input style="background-color:cyan; border-radius: 10%; border: ridge; " type='button' value='csv' onclick='drawCsv()'>
+    <input style="background-color:cyan; border-radius: 10%; border: ridge; " type="button" value="save as pdf" onClick="window.print()">
+  </div>
+  
+  <div id="images" style="transform: rotate(0deg); padding-left: 200px; ">
+    <h3>Clustered Plots:</h3>
+    
+    <img style=" border: ridge;" class="data" id="image2" src="{% static 'images/age_distribution.png'%}" alt="#">
+    <img style=" border: ridge;" class="data" id="image3" src="{% static 'images/age_income.png'%}" alt="#">
+    <img style=" border: ridge;" class="data" id="image4" src="{% static 'images/c_age_income.png'%}" alt="#">
+    <img style=" border: ridge;" class="data" id="image5" src="{% static 'images/default_cases.png'%}" alt="#">
+    <img style=" border: ridge;" class="data" id="image6" src="{% static 'images/y_income.png'%}" alt="#">
+    <img style=" border: ridge;" class="data" id="image1" src="{% static 'images/3d_plot.png'%}" alt="#">
+  </div>
+
+  <div window.print(); id="info" style="margin-top:20px; margin-left: 200px; margin-right:50px;  background: white;">
+    <br>
+    <div id="data1">{{data1 | safe}}</div>
+    <br>
+    <div id="data2">{{data2}}</div>
+    <br>
+    <div id="data3">
+      <h3>Cluster Data Samples</h3>
+      {{data3}}
+    </div>
+    <br>
+    <div id="data4">{{data4}}</div>
+    <br>
+    <div id="data5">{{data5 | safe}}</div>
+    <br>
+    <div id="data6">{{data6 | safe}}</div>
+    <br>
+  </div>
+  
+  <div id="csv" style=" margin-top:20px;  margin-left: 200px; margin-right:200px; background: white; ">
+    <br>
+    {{csv | safe}}
+  </div>
+  <br>
+  <div style="margin-left:220px; margin-right: 220px;border: ridge; ">
+  <h2 style="margin-left:200px; margin-right: 200px; padding:0px 0px 0px 0px ; text-align: center;color:black; ">Developed by</h2>
+  <h5 style="margin-left:200px; margin-right: 200px; padding:0px 0px 0px 0px ; text-align: center;color:black; ">AnkitPal</h5>
+  <h5 style="margin-left:200px; margin-right: 200px; padding:0px 0px 0px 0px ; text-align: center;color:black; ">Ayush Mishra</h5>
+  <h5 style="margin-left:200px; margin-right: 200px; padding:0px 0px 0px 0px; text-align: center;color:black; ">Avadhut Mane</h5>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="{% static 'js/index.js'%}"></script>
+  
+</body>
+</html>
